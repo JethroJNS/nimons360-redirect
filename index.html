@@ -190,17 +190,14 @@
     </div>
 
     <script>
-        // Parse URL parameters
         const params = new URLSearchParams(window.location.search);
         const familyId = params.get('id');
         const familyCode = params.get('code');
         const familyName = decodeURIComponent(params.get('name') || 'this family');
 
-        // Update UI with family information
         document.getElementById('familyName').textContent = familyName;
         document.getElementById('familyCode').textContent = familyCode || '------';
 
-        // Construct deep link
         const deepLink = `nimons360://family/${familyId}?code=${familyCode}`;
 
         let redirectAttempted = false;
@@ -210,23 +207,19 @@
             if (redirectAttempted) return;
             redirectAttempted = true;
 
-            // Update UI
             document.getElementById('openAppBtn').style.display = 'none';
             document.getElementById('spinner').style.display = 'block';
             document.getElementById('statusMsg').textContent = 'Opening Nimons360 app...';
 
-            // Create hidden iframe to trigger deep link
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';
             iframe.src = deepLink;
             document.body.appendChild(iframe);
 
-            // Also try window.location as fallback
             setTimeout(() => {
                 window.location.href = deepLink;
             }, 100);
 
-            // Check if app opened by monitoring visibility
             let visibilityTimer;
             const checkVisibility = () => {
                 if (document.hidden) {
@@ -237,12 +230,10 @@
 
             document.addEventListener('visibilitychange', checkVisibility);
 
-            // Fallback: if app didn't open after 2.5 seconds
             visibilityTimer = setTimeout(() => {
                 document.removeEventListener('visibilitychange', checkVisibility);
 
                 if (!appOpened && !document.hidden) {
-                    // App didn't open - show fallback
                     document.getElementById('spinner').style.display = 'none';
                     document.getElementById('statusMsg').textContent = 'Unable to open app automatically';
                     document.getElementById('statusMsg').style.color = '#dc3545';
@@ -253,13 +244,11 @@
             }, 2500);
         }
 
-        // Validate required parameters
         if (!familyId || !familyCode) {
             document.getElementById('openAppBtn').style.display = 'none';
             document.getElementById('statusMsg').innerHTML = '⚠️ Invalid link. Missing family information.';
             document.getElementById('statusMsg').style.color = '#dc3545';
         } else {
-            // Auto-open app after 800ms
             window.addEventListener('load', () => {
                 setTimeout(() => {
                     openApp();
@@ -267,10 +256,8 @@
             });
         }
 
-        // Prevent accidental navigation
         window.addEventListener('beforeunload', (e) => {
             if (redirectAttempted && !appOpened) {
-                // Don't prevent if we're still trying
             }
         });
     </script>
