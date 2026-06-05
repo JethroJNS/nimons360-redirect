@@ -150,69 +150,6 @@
             font-weight: 500;
         }
 
-        .fallback {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid #f0f0f0;
-        }
-
-        .fallback-title {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .store-link {
-            display: inline-block;
-            margin: 10px 0;
-        }
-
-        .store-link img {
-            height: 50px;
-            transition: transform 0.2s;
-        }
-
-        .store-link:hover img {
-            transform: scale(1.05);
-        }
-
-        .manual-steps {
-            text-align: left;
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 15px;
-            border-left: 4px solid #667eea;
-        }
-
-        .manual-steps strong {
-            color: #333;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .manual-steps ol {
-            margin-left: 20px;
-            color: #666;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .manual-steps li {
-            margin-bottom: 5px;
-        }
-
-        .error-message {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            color: #856404;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
         .footer {
             margin-top: 30px;
             padding-top: 20px;
@@ -243,24 +180,6 @@
 
         <div class="spinner" id="spinner"></div>
         <div class="status-message" id="statusMsg"></div>
-
-        <div class="fallback" id="fallbackSection" style="display: none;">
-            <div class="fallback-title">App not installed?</div>
-            <a href="https://play.google.com/store/apps/details?id=com.nimons360" class="store-link" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
-            </a>
-
-            <div class="manual-steps">
-                <strong>📝 Manual Steps:</strong>
-                <ol>
-                    <li>Install Nimons360 from Google Play Store</li>
-                    <li>Open the app and login</li>
-                    <li>Go to Families tab</li>
-                    <li>Tap "Join Family"</li>
-                    <li>Enter the family code shown above</li>
-                </ol>
-            </div>
-        </div>
 
         <div class="footer">
             Nimons360 - Stay connected with family
@@ -326,7 +245,6 @@
                     document.getElementById('statusMsg').style.color = '#dc3545';
                     document.getElementById('openAppBtn').textContent = 'Try Again';
                     document.getElementById('openAppBtn').style.display = 'inline-block';
-                    document.getElementById('fallbackSection').style.display = 'block';
                     redirectAttempted = false;
                 }
             }, 2500);
@@ -337,7 +255,6 @@
             document.getElementById('openAppBtn').style.display = 'none';
             document.getElementById('statusMsg').innerHTML = '⚠️ Invalid link. Missing family information.';
             document.getElementById('statusMsg').style.color = '#dc3545';
-            document.getElementById('fallbackSection').style.display = 'block';
         } else {
             // Auto-open app after 800ms
             window.addEventListener('load', () => {
